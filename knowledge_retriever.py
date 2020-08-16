@@ -1,5 +1,6 @@
 from knowledge_provider import KnowledgeProvider
-import utlity
+import utility
+
 
 class KnowledgeRetriever:
 
@@ -16,8 +17,9 @@ class KnowledgeRetriever:
 
 
 	def __init__(self):
+		#print("Knowlege Retriever class is initialized.")
 		self.knowledge_provider = KnowledgeProvider()
-		self.initialized_data()
+		self.words, self.categories, self.words_categories = self.initialized_data()
 
 	def initialized_data(self):
 
@@ -45,25 +47,21 @@ class KnowledgeRetriever:
 		    intent['Heading_Keywords'] = stem_heading_list
 		    intent['Content_Keywords'] = stem_content_list
 		    
-		    self.words.extend(stem_heading_list)
+		    words.extend(stem_heading_list)
 		    
-		    self.words_categories.append((stem_heading_list, intent['Heading']))
+		    words_categories.append((stem_heading_list, intent['Heading']))
 		    
 		    if intent['Heading'] not in categories:
-		        self.categories.append(intent['Heading'])
+		        categories.append(intent['Heading'])
+
+		words = sorted(list(set(words)))
+
+		categories = sorted(list(set(categories)))
+
+		return (words, categories, words_categories)
 
 
-	def get_words(self):
-		#removing duplication of words and storing a sorted list 
-		return sorted(list(set(self.words)))
-
-	def get_categories(self):
-		#removing duplication of categories and storing a sorted list 
-		return sorted(list(set(self.categories)))
-
-	def get_word_categories(self):
-		return self.words_categories
-
-
-
-
+if __name__ == "__main__":
+	#print("NLP Engine main function is executing.")
+	knowledge_retriever = KnowledgeRetriever()
+	print(knowledge_retriever.words)

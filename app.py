@@ -52,9 +52,16 @@ def message(msg):
             #allowing the bot to answer only when called 
             if user_id not in authed_users and called_user in authed_users:
                 #calling the query function to find answer for user's query
-                processed_text = query_engine.find_answer(called_text)
+                processed_text = query_engine.get_answer(called_text)
+
+                result_str = ""
+                result_str += "Topic: " + processed_text["Heading"] + "\n"
+                result_str += "----------------------------------------------------------------\n"
+                result_str += processed_text["Content"] + "\n"
+                result_str += "----------------------------------------------------------------\n"
+                result_str += "Link: " + processed_text["Link"] + "\n"
                 #posting the message to the slack channel
-                slack_web_client.chat_postMessage(channel=channel_id, text=processed_text)
+                slack_web_client.chat_postMessage(channel=channel_id, text=result_str)
 
 
 #main function for the app

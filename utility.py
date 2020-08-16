@@ -5,7 +5,6 @@ from nltk import RegexpTokenizer
 #nltk.download("stopwords")
 from nltk.corpus import stopwords
 from nltk.stem import PorterStemmer
-from knowledge_retriever import KnowledgeRetriever
 
 
 #function to remove stop words

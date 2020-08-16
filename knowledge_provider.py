@@ -5,7 +5,7 @@ class KnowledgeProvider:
 	JSON_FILE_PATH = "./Licensing_Key.json"
 
 	#function to retrieve the JSON data from the licensing data
-	def getJsonData(self):
+	def get_json_data(self):
 		with open(self.JSON_FILE_PATH, 'r') as doc:
 			return json.load(doc)
 
