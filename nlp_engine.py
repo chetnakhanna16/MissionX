@@ -95,6 +95,6 @@ class NlpEngine:
 #main function for the NLP task
 if __name__ == "__main__":
 	nlp_engine = NlpEngine()
-	#print(nlp_engine.get_response("I want to license a Prism cluster. Please let me know the procedure.", "ANN"))
+	print(nlp_engine.get_response("I want to license a Prism cluster. Please let me know the procedure.", "ANN"))
 
 

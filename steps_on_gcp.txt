@@ -1,0 +1,101 @@
+1. Created GCP instance
+2. install ssh key
+3. upload ssh public key to githun
+4. install git
+5. git clone MissionX code to GCP machine
+6. install python version > 3.6
+7. Use this link to install python3.7 - 
+		https://linuxize.com/post/how-to-install-python-3-7-on-debian-9/ 
+	and this link to solve error related to sqlite3 
+		https://stackoverflow.com/questions/1210664/no-module-named-sqlite3
+8. Now we got error regarding stopwords and plunkt
+	>>> import nltk
+	>>> import nltk.download("stopwords")
+	>>> import nltk.download("plunkt")
+9. Need to run flask server on port 3000 and host 0.0.0.0 (to make it visible from internet)
+	https://stackoverflow.com/questions/30554702/cant-connect-to-flask-web-service-connection-refused
+
+
+
+pip3 install --user -r requirements.txt
+
+
+
+
+
+
+
+
+cd /Users/ankurrastogi/Chetna/Internship_Project/PythOnBoardingBot
+
+python3 -m venv env/
+source env/bin/activate
+
+source env/bin/activate && export SLACK_SIGNING_SECRET=“21364d515ad5ca6ffb3bbe5b1b4847d1” && export SLACK_BOT_TOKEN='xoxb-1229581875847-1282675776676-Z3FxMkBNTyvCwHxOSTWnxMhr' && FLASK_ENV=development python3.7 app.py
+
+export SLACK_SIGNING_SECRET=“21364d515ad5ca6ffb3bbe5b1b4847d1”
+
+
+export SLACK_BOT_TOKEN='xoxb-1229581875847-1282675776676-Z3FxMkBNTyvCwHxOSTWnxMhr'
+
+
+https://38a792451ff8.ngrok.io/slack/events
+
+
+source env/bin/activate
+export SLACK_SIGNING_SECRET=21364d515ad5ca6ffb3bbe5b1b4847d1
+export SLACK_BOT_TOKEN=xoxb-1229581875847-1282675776676-Z3FxMkBNTyvCwHxOSTWnxMhr
+FLASK_ENV=development python3.7 app.py
+
+
+https://github.com/slackapi/python-slackclient/tree/master/tutorial
+
+
+./ngrok http 3000
+
+
+
+
+1. gcloud ssh command
+
+2. Go to the directory
+
+3. git status
+
+4. git pull origin master
+
+5. git stash
+
+6. vim app.py to edit the file
+
+7. upper arrow to go to the line
+
+8. i for insertion
+
+9. Esc to go away from the insertion cursor
+
+10. :wq to save the changes and come out
+
+11. :q! to undo the changes and come out
+
+12. git stash apply
+
+13. http://34.121.54.39:3000/slack/events
+
+14. :q to come out of vim file
+
+15. sudo systemctl restart slack.chat to restart the app with changes
+
+
+https://medium.com/@benmorel/creating-a-linux-service-with-systemd-611b5c8b91d6
+https://www.digitalocean.com/community/tutorials/how-to-use-systemctl-to-manage-systemd-services-and-units
+
+
+
+
+#!/bin/bash
+cd /home/ankurrastogi/internship_project/MissionX/
+source env/bin/activate
+export SLACK_SIGNING_SECRET=21364d515ad5ca6ffb3bbe5b1b4847d1
+export SLACK_BOT_TOKEN=xoxb-1229581875847-1282675776676-Z3FxMkBNTyvCwHxOSTWnxMhr
+python3.7 app.py

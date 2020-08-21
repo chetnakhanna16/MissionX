@@ -30,12 +30,13 @@ class QueryEngine:
 if __name__ == "__main__":
 	query_engine = QueryEngine()
 	query_engine.logger.info("\n")
-	ques = input("Enter your question: ")
-	ans = query_engine.get_answer(ques)
+	#ques = input("Enter your question: ")
+	#ans = query_engine.get_answer(ques)
+	ans = query_engine.get_answer("What is calm licensing?")
 
 	print(ans['Heading'])
 	print(ans['Content'])
-	print(ans['Link'])
+	print(ans['Link'])	
 
 
 
