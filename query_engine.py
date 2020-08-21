@@ -24,13 +24,18 @@ class QueryEngine:
 
 	def get_answer(self, question):
 		question_word_list = utility.pre_processing(question)
-		return self.nlp_engine.get_response(question_word_list, "ANN")
+		return self.nlp_engine.get_response(question_word_list, "LSTM")
 
 #main function for the pre-processing task
 if __name__ == "__main__":
 	query_engine = QueryEngine()
 	query_engine.logger.info("\n")
-	print(query_engine.get_answer("What are the requirements to license a cluster?"))
+	ques = input("Enter your question: ")
+	ans = query_engine.get_answer(ques)
+
+	print(ans['Heading'])
+	print(ans['Content'])
+	print(ans['Link'])
 
 
 
