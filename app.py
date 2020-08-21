@@ -54,12 +54,9 @@ def message(msg):
                 #calling the query function to find answer for user's query
                 processed_text = query_engine.get_answer(called_text)
 
-                result_str = ""
-                result_str += "Topic: " + processed_text["Heading"] + "\n"
+                result_str = "<" + processed_text["Link"] + "|" + processed_text["Heading"] + ">\n"
                 result_str += "----------------------------------------------------------------\n"
-                result_str += processed_text["Content"] + "\n"
-                result_str += "----------------------------------------------------------------\n"
-                result_str += "Link: " + processed_text["Link"] + "\n"
+                result_str += ' '.join(processed_text["Content"].split()[:100]) + "\n"
                 #posting the message to the slack channel
                 slack_web_client.chat_postMessage(channel=channel_id, text=result_str)
 
@@ -71,5 +68,5 @@ if __name__ == "__main__":
     logger.addHandler(logging.StreamHandler())
     query_engine = QueryEngine()
 
-    app.run(port=3000)    
+    app.run(host='0.0.0.0',port=3000)    
 
