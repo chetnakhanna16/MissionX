@@ -55,7 +55,7 @@ def message(msg):
                 processed_text = query_engine.get_answer(called_text)
 
                 result_str = "<" + processed_text["Link"] + "|" + processed_text["Heading"] + ">\n"
-                result_str += "----------------------------------------------------------------\n"
+                #result_str += "----------------------------------------------------------------\n"
                 result_str += ' '.join(processed_text["Content"].split()[:100]) + "\n"
                 #posting the message to the slack channel
                 slack_web_client.chat_postMessage(channel=channel_id, text=result_str)
