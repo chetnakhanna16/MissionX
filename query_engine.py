@@ -24,7 +24,7 @@ class QueryEngine:
 
 	def get_answer(self, question):
 		question_word_list = utility.pre_processing(question)
-		return self.nlp_engine.get_response(question_word_list, "LSTM")
+		return self.nlp_engine.get_response(question_word_list, "ANN")
 
 #main function for the pre-processing task
 if __name__ == "__main__":
