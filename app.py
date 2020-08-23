@@ -61,7 +61,7 @@ def message(msg):
                     result_str = "Please contact the customer support for assistance regarding the same."
                 if len(processed_text) >= 1:
                     result_str = "<" + processed_text[0]["Link"] + "|" + processed_text[0]["Heading"] + ">\n"
-                    result_str += ' '.join(processed_text[0]["Content"].split()[:50]) + "\n"
+                    result_str += ' '.join(processed_text[0]["Content"].split())[:4] + "\n"
                 if len(processed_text) >= 2:
                     result_str += "*Related article(s):*" + "\n"
                     result_str += "<" + processed_text[1]["Link"] + "|" + processed_text[1]["Heading"] + ">\n"
