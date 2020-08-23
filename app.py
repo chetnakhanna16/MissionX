@@ -52,13 +52,32 @@ def message(msg):
             #allowing the bot to answer only when called 
             if user_id not in authed_users and called_user in authed_users:
                 #calling the query function to find answer for user's query
+
                 processed_text = query_engine.get_answer(called_text)
 
-                result_str = "<" + processed_text["Link"] + "|" + processed_text["Heading"] + ">\n"
-                #result_str += "----------------------------------------------------------------\n"
-                result_str += ' '.join(processed_text["Content"].split()[:50]) + "\n"
+                result_str = ""
+
+                if len(processed_text) == 0:
+                    result_str = "Please contact the customer support for assistance regarding the same."
+                if len(processed_text) >= 1:
+                    result_str = "<" + processed_text[0]["Link"] + "|" + processed_text[0]["Heading"] + ">\n"
+                    result_str += ' '.join(processed_text[0]["Content"].split()[:50]) + "\n"
+                if len(processed_text) >= 2:
+                    result_str += "<" + processed_text[1]["Link"] + "|" + processed_text[1]["Heading"] + ">\n"
+                if len(processed_text) >= 3:
+                    result_str += "<" + processed_text[2]["Link"] + "|" + processed_text[2]["Heading"] + ">\n"    
                 #posting the message to the slack channel
                 slack_web_client.chat_postMessage(channel=channel_id, text=result_str)
+
+                #print(result_str)
+
+                # processed_text = query_engine.get_answer(called_text)
+
+                # result_str = "<" + processed_text["Link"] + "|" + processed_text["Heading"] + ">\n"
+                # #result_str += "----------------------------------------------------------------\n"
+                # result_str += ' '.join(processed_text["Content"].split()[:50]) + "\n"
+                # #posting the message to the slack channel
+                # slack_web_client.chat_postMessage(channel=channel_id, text=result_str)
 
 
 #main function for the app
