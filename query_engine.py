@@ -36,7 +36,6 @@ if __name__ == "__main__":
 		ans = query_engine.get_answer(ques)
 		# ans = query_engine.get_answer("What is the weather today?")
 
-		print(ans)
 
 		# if type(ans) == type([]):
 		# 	for index in ans:
