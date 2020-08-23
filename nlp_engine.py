@@ -83,7 +83,7 @@ class NlpEngine:
 		result = []
 
 		if len(prediction) == 0:
-			return ("Please contact the customer support for assistance regarding the same.")
+			return []
 		else:
 			list_of_predictions = self.json_file['intents']
 
