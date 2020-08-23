@@ -30,13 +30,23 @@ class QueryEngine:
 if __name__ == "__main__":
 	query_engine = QueryEngine()
 	query_engine.logger.info("\n")
-	#ques = input("Enter your question: ")
-	#ans = query_engine.get_answer(ques)
-	ans = query_engine.get_answer("What is calm licensing?")
+	while(True):
+		print("\n\n")
+		ques = input("Enter your question: ")
+		ans = query_engine.get_answer(ques)
+		# ans = query_engine.get_answer("What is the weather today?")
 
-	print(ans['Heading'])
-	print(ans['Content'])
-	print(ans['Link'])	
+		print(ans)
+
+		# if type(ans) == type([]):
+		# 	for index in ans:
+		# 		if('Heading' in ans[index]):
+		# 			print("Heading:" + ans['Heading'])
+		# 			print("Content: " + ans['Content'])
+		# 			print("Link: " + ans['Link'])
+		# 			print("\n\n")
+		# else:
+		# 	print(ans)	
 
 
 
