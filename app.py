@@ -36,6 +36,16 @@ def message(msg):
     #retrieve the blocks from the event to access the user_id of the bot and text sent by the user
     blocks = event.get("blocks")
 
+    thread_ts_id = event.get("thread_ts")
+    #print("thread_ts_id: ", thread_ts_id)
+    ts_id = event.get("ts")
+    #print("ts_id: ", ts_id)
+
+    if(thread_ts_id == None):
+        thread_ts_id = ts_id
+
+   #print(msg)
+
     if blocks != None:
         outer_elements = blocks[0].get("elements")
         inner_elements = outer_elements[0].get("elements")
@@ -68,7 +78,7 @@ def message(msg):
                 if len(processed_text) >= 3:
                     result_str += "<" + processed_text[2]["Link"] + "|" + processed_text[2]["Heading"] + ">\n"    
                 #posting the message to the slack channel
-                slack_web_client.chat_postMessage(channel=channel_id, text=result_str)
+                slack_web_client.chat_postMessage(channel=channel_id, text=result_str, thread_ts=thread_ts_id)
 
                 #print(result_str)
 
@@ -88,5 +98,10 @@ if __name__ == "__main__":
     logger.addHandler(logging.StreamHandler())
     query_engine = QueryEngine()
 
-    app.run(host='0.0.0.0',port=3000)    
+    app.run(port=3000)    
+
+    # channel_id="C019VQB0CJC"
+    # result_str="testing"
+    # ts_id="1598367225.002200"
+    # slack_web_client.chat_postMessage(channel=channel_id, text=result_str, thread_ts=ts_id)
 
