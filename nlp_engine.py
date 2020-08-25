@@ -49,7 +49,7 @@ class NlpEngine:
 	def predict(self, question_word_list, algorithm):
 		
 		p = self.bag_of_words(question_word_list, self.know_retriever.words)
-		print(p)
+		
 		if algorithm == "LSTM": 
 			#prediction probability for each word using LSTM
 			pred_prob = self.lstm.model.predict(np.array([p]))[0]
@@ -57,9 +57,8 @@ class NlpEngine:
 		elif algorithm == "ANN":
 			#prediction probability for each word using LSTM
 			pred_prob = self.ann.model.predict(np.array([p]))[0]
-			print(pred_prob)
 			
-		threshold = 0.2
+		threshold = 0.3
 		pred_prob_list = [[i,r] for i,r in enumerate(pred_prob) if r > threshold]
 		#print(pred_prob_list)
 		
