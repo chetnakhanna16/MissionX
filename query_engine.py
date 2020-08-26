@@ -10,6 +10,7 @@ import logging
 import utility
 
 
+#class to get the answer using the mentioned algorithm  
 class QueryEngine:
 
 	nlp_engine = None
@@ -22,9 +23,11 @@ class QueryEngine:
 		self.logger.setLevel(logging.INFO)
 		self.logger.addHandler(logging.StreamHandler())
 
+	#function to predict answwe using the mentioned algorithm
 	def get_answer(self, question):
 		question_word_list = utility.pre_processing(question)
 		return self.nlp_engine.get_response(question_word_list, "ANN")
+
 
 #main function for the pre-processing task
 if __name__ == "__main__":
@@ -34,18 +37,6 @@ if __name__ == "__main__":
 		print("\n\n")
 		ques = input("Enter your question: ")
 		ans = query_engine.get_answer(ques)
-		# ans = query_engine.get_answer("What is the weather today?")
-
-
-		# if type(ans) == type([]):
-		# 	for index in ans:
-		# 		if('Heading' in ans[index]):
-		# 			print("Heading:" + ans['Heading'])
-		# 			print("Content: " + ans['Content'])
-		# 			print("Link: " + ans['Link'])
-		# 			print("\n\n")
-		# else:
-		# 	print(ans)	
 
 
 
