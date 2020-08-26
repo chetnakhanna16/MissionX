@@ -80,3 +80,36 @@ def training_data(categories, words_categories):
 	train_y = list(training_data[:,1])
 
 	return (train_X, train_y)
+
+
+def add_trailing_dots(text):
+    
+    text_with_dots = text
+    
+    if text[len(text)-1] != ".":
+        text_with_dots += "..."
+        
+    return text_with_dots
+
+
+def formatted_text(text):
+    
+    formatted_str = text[0]
+    
+    for i in range(1, len(text)):
+        if ord(text[i]) in range(65,91): 
+            if ord(text[i-1]) not in range(65,91) and text[i-1] != " " and text[i-1] != "(":
+                formatted_str += "\n\n" + text[i]
+            else: 
+                formatted_str += text[i]
+        else:
+            formatted_str += text[i]
+            
+    formatted_answer = add_trailing_dots(formatted_str)
+
+    return formatted_answer
+
+
+
+
+
