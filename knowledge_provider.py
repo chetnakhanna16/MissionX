@@ -1,5 +1,7 @@
 import json
 
+
+#class to open the licensing json
 class KnowledgeProvider:
 
 	JSON_FILE_PATH = "./Licensing_Key.json"
