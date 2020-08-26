@@ -2,17 +2,18 @@ from knowledge_provider import KnowledgeProvider
 import utility
 
 
+#class to retrieve the words and categories list
 class KnowledgeRetriever:
 
 	knowledge_provider = None
 
-	#a list which will contain the pre-processing words from the heading 
+	#list which will contain the pre-processing words from the heading 
 	words = []
 
-	#a list which will contain all the headings from the document
+	#list which will contain all the headings from the document
 	categories = []
 
-	#a list which will contain the tuple of words list and their categories
+	#list which will contain the tuple of words list and their categories
 	words_categories = []
 
 
@@ -21,6 +22,7 @@ class KnowledgeRetriever:
 		self.knowledge_provider = KnowledgeProvider()
 		self.words, self.categories, self.words_categories = self.initialized_data()
 
+	
 	def initialized_data(self):
 
 		licensing_json = self.knowledge_provider.get_json_data()
