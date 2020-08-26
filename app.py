@@ -95,4 +95,4 @@ if __name__ == "__main__":
     logger.addHandler(logging.StreamHandler())
     query_engine = QueryEngine()
 
-    app.run(port=3000)    
+    app.run(host='0.0.0.0', port=3000) 
