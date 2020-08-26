@@ -6,12 +6,15 @@ from slackeventsapi import SlackEventAdapter
 from query_engine import QueryEngine
 import utility 
 
+
 # Initialize a Flask app to host the events adapter
 app = Flask(__name__)
 slack_events_adapter = SlackEventAdapter(os.environ['SLACK_SIGNING_SECRET'], "/slack/events", app)
 
+
 # Initialize a Web API client
 slack_web_client = WebClient(token = os.environ['SLACK_BOT_TOKEN'])
+
 
 # MESSAGE EVENTS
 # When a user sends a direct message, the event type will be 'message'
@@ -19,6 +22,7 @@ slack_web_client = WebClient(token = os.environ['SLACK_BOT_TOKEN'])
 @slack_events_adapter.on("message")
 
 
+#message function to retrieve different elements from the message that was posted on Slack
 def message(msg):
 
     #retrieve the event from the slack message
@@ -62,8 +66,8 @@ def message(msg):
 
             #allowing the bot to answer only when called 
             if user_id not in authed_users and called_user in authed_users:
+            
                 #calling the query function to find answer for user's query
-
                 processed_text = query_engine.get_answer(called_text)
 
                 result_str = ""
@@ -78,19 +82,10 @@ def message(msg):
                     result_str += "<" + processed_text[1]["Link"] + "|" + processed_text[1]["Heading"] + ">\n"
                 if len(processed_text) >= 3:
                     result_str += "<" + processed_text[2]["Link"] + "|" + processed_text[2]["Heading"] + ">\n"  
+                #print(result_str)
 
                 #posting the message to the slack channel
                 slack_web_client.chat_postMessage(channel=channel_id, text=result_str, thread_ts=thread_ts_id)
-
-                #print(result_str)
-
-                # processed_text = query_engine.get_answer(called_text)
-
-                # result_str = "<" + processed_text["Link"] + "|" + processed_text["Heading"] + ">\n"
-                # #result_str += "----------------------------------------------------------------\n"
-                # result_str += ' '.join(processed_text["Content"].split()[:50]) + "\n"
-                # #posting the message to the slack channel
-                # slack_web_client.chat_postMessage(channel=channel_id, text=result_str)
 
 
 #main function for the app
@@ -101,9 +96,3 @@ if __name__ == "__main__":
     query_engine = QueryEngine()
 
     app.run(port=3000)    
-
-    # channel_id="C019VQB0CJC"
-    # result_str="testing"
-    # ts_id="1598367225.002200"
-    # slack_web_client.chat_postMessage(channel=channel_id, text=result_str, thread_ts=ts_id)
-
