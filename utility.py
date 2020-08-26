@@ -34,7 +34,7 @@ def word_stemming(myList):
     return newList
 
 
-#function returning the pre-processed question to be used in NLP algorithm
+#function to pre-process the question to be used in the algorithms
 def pre_processing(text):
 
     text_lowercase = text.lower()
@@ -82,6 +82,7 @@ def training_data(categories, words_categories):
 	return (train_X, train_y)
 
 
+#function to add trailing zeros at the end of the answer
 def add_trailing_dots(text):
     
     text_with_dots = text
@@ -91,6 +92,10 @@ def add_trailing_dots(text):
         
     return text_with_dots
 
+
+#function to format the answer
+#if the alphabet is capital and does not have another capital alphabet, 
+#a space and an opening bracket before it then add move the text to next line.
 
 def formatted_text(text):
     

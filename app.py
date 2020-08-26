@@ -4,6 +4,7 @@ from flask import Flask
 from slack import WebClient
 from slackeventsapi import SlackEventAdapter
 from query_engine import QueryEngine
+import utility 
 
 # Initialize a Flask app to host the events adapter
 app = Flask(__name__)
@@ -71,12 +72,13 @@ def message(msg):
                     result_str = "Please contact the customer support for assistance regarding the same."
                 if len(processed_text) >= 1:
                     result_str = "<" + processed_text[0]["Link"] + "|" + processed_text[0]["Heading"] + ">\n"
-                    result_str += ' '.join(processed_text[0]["Content"].split()[:100]) + "\n"
+                    result_str += utility.formatted_text(' '.join(processed_text[0]["Content"].split()[:100])) + "\n"
                 if len(processed_text) >= 2:
                     result_str += "*Related article(s):*" + "\n"
                     result_str += "<" + processed_text[1]["Link"] + "|" + processed_text[1]["Heading"] + ">\n"
                 if len(processed_text) >= 3:
-                    result_str += "<" + processed_text[2]["Link"] + "|" + processed_text[2]["Heading"] + ">\n"    
+                    result_str += "<" + processed_text[2]["Link"] + "|" + processed_text[2]["Heading"] + ">\n"  
+
                 #posting the message to the slack channel
                 slack_web_client.chat_postMessage(channel=channel_id, text=result_str, thread_ts=thread_ts_id)
 
