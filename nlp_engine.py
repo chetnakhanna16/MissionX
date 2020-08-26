@@ -6,6 +6,7 @@ from model.lstm import LstmModel
 from knowledge_retriever import KnowledgeRetriever
 import numpy as np
 
+#class to create a nlp engine which will predict the answers 
 class NlpEngine:
 
 	knowledge_provider = None
@@ -28,7 +29,8 @@ class NlpEngine:
 		self.know_retriever = KnowledgeRetriever()
 		self.json_file = self.knowledge_provider.get_json_data() 
 
-	#return bag of words array: 0 or 1 for words that exist in sentence
+	#function to create bag of words array with 1 for words that exist in sentence
+	#and 0 for the words that does not
 	def bag_of_words(self, question_word_list, words):
 		
 		#bag of words - vocabulary matrix
@@ -54,15 +56,17 @@ class NlpEngine:
 			#prediction probability for each word using LSTM
 			pred_prob = self.lstm.model.predict(np.array([p]))[0]
 			#print(pred_prob)
+
 		elif algorithm == "ANN":
 			#prediction probability for each word using LSTM
 			pred_prob = self.ann.model.predict(np.array([p]))[0]
-			
+		
+		#answers will be given only if the predicted probability is more than the threshold	
 		threshold = 0.3
 		pred_prob_list = [[i,r] for i,r in enumerate(pred_prob) if r > threshold]
 		#print(pred_prob_list)
 		
-		#sorting acoording to the probabilities (in descending order)
+		#sorting according to the probabilities (in descending order)
 		pred_prob_list.sort(key=lambda x: x[1], reverse=True)
 		#print(pred_prob_list)
 		
@@ -74,7 +78,7 @@ class NlpEngine:
 		return sorted_heading_prob
 
 
-	#get top 1 response for the question as it is predicted with the highest probability
+	#get top 1 response for the question(that is, response with highest probability)
 	def get_response(self, question_word_list, algorithm):
 
 		prediction = self.predict(question_word_list, algorithm)
@@ -97,11 +101,6 @@ class NlpEngine:
 
 				for pred in list_of_predictions:
 					if(pred['Heading']== prediction_topic):
-						#myDict = {}
-						# myDict['Heading'] = pred['Heading']
-						# myDict['Link'] = pred['Link']
-						# myDict['Content'] = pred['Content']
-						# result.append(myDict)
 						result.append({"Heading": pred['Heading'], "Link" : pred['Link'], "Content": pred['Content']})
 						continue
 		
