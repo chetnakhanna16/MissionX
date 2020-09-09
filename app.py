@@ -27,6 +27,7 @@ def message(msg):
 
     #retrieve the event from the slack message
     event = msg.get("event", {})
+    print(event)
 
     #retrieve the channel_id, user_id, text from the event
     channel_id = event.get("channel")
@@ -58,21 +59,29 @@ def message(msg):
         called_user = None
         called_text = None
 
-        if len(inner_elements) > 1:
-            called_user = inner_elements[0].get("user_id")
-            called_text = inner_elements[1].get("text")
+        passive_mode = False
+
+        if len(inner_elements) >= 1:
+
+            if len(inner_elements) == 1:
+                passive_mode = True
+                called_user = None
+                called_text = inner_elements[0].get("text")
+            else:
+                called_user = inner_elements[0].get("user_id")
+                called_text = inner_elements[1].get("text")
 
             #print(msg)
 
             #allowing the bot to answer only when called 
-            if user_id not in authed_users and called_user in authed_users:
+            if user_id not in authed_users:
             
                 #calling the query function to find answer for user's query
                 processed_text = query_engine.get_answer(called_text)
 
                 result_str = ""
 
-                if len(processed_text) == 0:
+                if len(processed_text) == 0 and passive_mode == False:
                     result_str = "Please contact the customer support for assistance regarding the same."
                 if len(processed_text) >= 1:
                     result_str = "<" + processed_text[0]["Link"] + "|" + processed_text[0]["Heading"] + ">\n"
