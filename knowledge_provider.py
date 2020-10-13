@@ -4,7 +4,7 @@ import json
 #class to open the licensing json
 class KnowledgeProvider:
 
-	JSON_FILE_PATH = "./Licensing_Key.json"
+	JSON_FILE_PATH = "./documentation_keywords.json"
 
 	#function to retrieve the JSON data from the licensing data
 	def get_json_data(self):
