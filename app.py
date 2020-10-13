@@ -94,7 +94,8 @@ def message(msg):
                 #print(result_str)
 
                 #posting the message to the slack channel
-                slack_web_client.chat_postMessage(channel=channel_id, text=result_str, thread_ts=thread_ts_id)
+                if len(result_str) > 0:
+                    slack_web_client.chat_postMessage(channel=channel_id, text=result_str, thread_ts=thread_ts_id)
 
 
 #main function for the app
